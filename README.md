@@ -1,47 +1,11 @@
-1. Hình thức thực hiện
-− Nhóm: 03 – 05 sinh viên (số lẻ), tối đa 07 sinh viên (cần sự chấp thuận của GV).
-− Thực hiện nghiên cứu tìm theo theo hướng dẫn tài liệu đồ án môn học hoặc có thể tự đề xuất đề tài dựa trên 
-độ đáp ứng các tiêu chí trong đồ án, phải có sự đồng ý của GVHD.
-− Yêu cầu tổng hợp quá trình tìm hiểu và thực hiện thông qua trình bày quyển báo cáo đồ án (theo mẫu).
-− Lưu trữ toàn bộ source-code, nguồn tài liệu tham khảo… lên github, gitlab,… hoặc các trang quản lý mã 
-nguồn tương tự (tracking đóng góp thông qua submit code).
-− Phân chia công việc rõ ràng (không tính thời gian làm báo cáo, slides, định dạng,… hoặc các công việc không 
-liên quan đến nội dung môn học)
-2. Nội dung thực hiện
-2.1. Tìm hiểu dữ liệu
-Nhóm thực hiện chọn một tập dữ liệu từ các kho dữ liệu tham khảo phổ biến sau:
-− Kho Dữ liệu Học Máy của trường UC Irvine
-− Các tập dữ liệu trên Kaggle
-− Các tập dữ liệu trên Amazon AWS
-− Data Portals
-− OpenDataMonitor
-− Quandl
-− Danh sách các tập dữ liệu Học Máy trên Wikipedia
-− Quora.com
-− Subreddit về các tập dữ liệu
-Sau đó, thực hiện việc mô tả chi tiết về dữ liệu đã chọn (lịch sử, nguồn gốc, công dụng, danh sách các đặc trưng, 
-kiểu dữ liệu, mục đích, lĩnh vực, hạn chế, khiếm khuyết,…)
-2.2. Thực hiện xử lý dữ liệu
-Nhóm xây dựng chương trình cho phép đọc tập dữ liệu và xử lý các yêu cầu đề xuất sau:
-– Tổ chức chương trình theo modules – packages, theo từng nhóm chức năng, công dụng, mục đích,…
-– Thực hiện các cơ chế CRUD (Create – Read – Update – Delete) trên tập dữ liệu.
-– Tìm hiểu việc làm sạch dữ liệu (sửa chữa, loại bỏ dữ liệu không chính xác hoặc được định dạng không 
-chính xác, trùng lặp dữ liệu, gán nhãn sai,…).
-– Tìm hiểu việc chuẩn hóa thống nhất dữ liệu (nếu có).
-– Vận dụng Numpy, Pandas vào quá trình làm sạch, chuẩn hóa dữ liệu.
-– Tìm hiểu việc trực quan hóa dữ liệu.
-– Vẽ các loại biểu đồ để biểu diễn dữ liệu trong tập dữ liệu nguồn.
-– Vận dụng các kiến thức về kiểu dữ liệu phức, hàm, xử lý tập tin, xử lý chuỗi,…
-– Xây dựng giao diện chương trình (optional).
-2.3. Báo cáo
-– Nhóm sinh viên được yêu cầu trình bày thông qua quyển báo cáo đồ án môn học (theo mẫu).
-– Soạn slides thuyết trình, trình bày những nội dung tìm hiểu và kết quả đạt được (10 – 15 slides).
-– Có bảng phân công công việc của các thành viên trong nhóm.
-2/2
-3. Đánh giá
-– Báo cáo thuyết trình trước lớp (không bắt buộc, nhóm đăng ký trước ưu tiên → điểm cộng)
-– Vấn đáp cá nhân từng thành viên trong nhóm dựa trên bảng phân công công việc, git (cuối kỳ) (bắt buộc).
-4. Tiến độ thực hiện
-– Báo cáo tuần 14 – 15.
-– Nộp báo cáo đồ án môn học bản mềm trước khi thi môn đầu tiên (dựa trên lịch thi).
-– Nộp báo cáo đồ án môn học bản cứng (final) trước khi thi môn cuối cùng (dựa trên lịch thi)
+Phân Tích Tình Hình Dịch COVID-19 Tại Việt Nam
+*Giới thiệu
+Dự án này nhằm phân tích tình hình dịch COVID-19 tại Việt Nam bằng cách sử dụng các tập dữ liệu từ các nguồn đáng tin cậy. Chúng tôi sẽ thực hiện các bước xử lý dữ liệu, làm sạch dữ liệu, và trực quan hóa dữ liệu để cung cấp cái nhìn tổng quan về tình hình dịch bệnh.COVID-19, do virus SARS-CoV-2 gây ra, đã ảnh hưởng nghiêm trọng đến sức khỏe cộng đồng và nền kinh tế toàn cầu. Việt Nam, mặc dù đã có những biện pháp kiểm soát dịch bệnh hiệu quả, vẫn phải đối mặt với nhiều thách thức trong việc ngăn chặn sự lây lan của virus. Dự án này sẽ tập trung vào việc phân tích các số liệu liên quan đến số ca nhiễm, số ca tử vong, và các biện pháp phòng chống dịch tại Việt Nam.
+Chúng em sẽ sử dụng các công cụ và thư viện Python như Pandas, Numpy, Matplotlib,.. để xử lý và trực quan hóa dữ liệu. Mục tiêu của dự án là cung cấp một cái nhìn chi tiết và toàn diện về tình hình dịch bệnh, từ đó hỗ trợ các nhà quản lý và cộng đồng trong việc đưa ra các quyết định phòng chống dịch hiệu quả.
+*Mục tiêu
++ Tìm hiểu và mô tả chi tiết về dữ liệu COVID-19 tại Việt Nam.
++ Thực hiện các thao tác xử lý dữ liệu như làm sạch, chuẩn hóa và trực quan hóa dữ liệu.
++Xây dựng các biểu đồ và báo cáo để trình bày kết quả phân tích.
+*Dữ liệu
+Dữ liệu được sử dụng trong dự án này được lấy từ kho dữ liệu KAGGEL:
+Link dữ liệu: https://www.kaggle.com/datasets/nhntran/vietnam-covid19-patient-dataset?select=Vietnam_COVID-19_patient_data_May10_2020.csv
