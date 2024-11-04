@@ -11,7 +11,7 @@ Chúng em sẽ sử dụng các công cụ và thư viện Python như Pandas, N
 + Xây dựng các biểu đồ và báo cáo để trình bày kết quả phân tích.
 + Vận dụng các kiến thức về kiểu dữ liệu phức, hàm, xử lý tập tin, xử lý chuỗi,…
 + Xây dựng giao diện chương trình (optional).
-+ 
+ 
 *Dữ liệu:
 + Dữ liệu được sử dụng trong dự án này được lấy từ kho dữ liệu KAGGEL:
 + Link dữ liệu: [https://www.kaggle.com/datasets/imdevskp/corona-virus-report/data?select=covid_19_clean_complete.csv]
