@@ -1,23 +1,28 @@
-import csv
-def update():
-    Date = input('Nhập date (yyyy-mm-dd): ') #chuẩn hóa theo định dạng yyyy-mm-dd nếu user nhập sai
-    Country_Region = input('Nhập Country/Region: ')
-    Confirmed = int(input('Nhập số lượng ca dương tính đã được xác nhận (Confirmed): '))
-    Deaths = int(input('Nhập số lượng ca tử vong (Deaths): '))
-    Recovered = int(input('Nhập số ca đã khỏi bệnh (Recovered): '))
-    Active = int(input('Nhập số lượng người dương tính (Active): '))
-    New_cases = int(input('Nhập số lượng trường hợp mới (New cases): '))
-    New_deaths = int(input('Nhập số lượng ca tử vong mới (New deaths): '))
-    New_recovered = int(input('Nhập số lượng ca dương tính mới(New recovered): '))
-    WHO_Region = input('Nhập WHO_Region: ')
-    data = [Date,Country_Region,Confirmed,Deaths,Recovered,Active,New_cases,New_deaths,New_recovered,WHO_Region]
+import pandas as pd
+#Mẫu cho list_to_update = [Date,Country_Region,Confirmed,Deaths,Recovered,Active,New_cases,New_deaths,New_recovered,WHO_Region]
+def update(file_path, list_to_update):
+    # Đọc file CSV vào DataFrame
+    df = pd.read_csv(file_path)
 
-    # data_input = input("Nhập dữ liệu (Date,Country_Region,Confirmed,Deaths,Recovered,Active,New_cases,New_deaths,New_recovered,WHO_Region): \n")
-    # data = data_input.split(',')
-    file_path = './full_grouped.csv'
-    with open(file_path, "a", newline = '') as fd:
-        csv_writer = csv.writer(fd, delimiter=',')
-        csv_writer.writerow(data)
-    print('Update thành công!')
+    # Cập nhật dữ liệu
+    date_to_update = list_to_update[0]
+    country_region_to_update = list_to_update[1]
+    field_name = ["Date", "Country/Region", "Confirmed", "Deaths", "Recovered",
+                    "Active", "New cases", "New deaths", "New recovered", "WHO Region"]
+
+    # Lọc dòng cần cập nhật với cả 2 điều kiện
+    condition = (df['Date'] == date_to_update) & (df['Country/Region'] == country_region_to_update)
+    
+    # Cập nhật các giá trị trong dòng đã tìm thấy
+    df.loc[condition, field_name] = list_to_update
+    
+    # Lưu lại DataFrame vào file CSV
+    df.to_csv(file_path, index=False)
+
+    print(f"Đã cập nhật thông tin của {date_to_update} {country_region_to_update} thành công!")
+
 if __name__ == "__main__":
-    update()
+    data_input = input("Nhập dữ liệu (Date,Country_Region,Confirmed,Deaths,Recovered,Active,New_cases,New_deaths,New_recovered,WHO_Region): \n")
+    data = data_input.split(',')
+    file_path = input('Nhập file_path của csv: ')
+    update(file_path, data)
