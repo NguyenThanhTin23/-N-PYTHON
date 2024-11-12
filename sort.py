@@ -10,7 +10,7 @@ def sort_csv(file_path, ascending=True):
     df = pd.read_csv(file_path)
     print(df.columns)
 
-    if ascending == 'False':
+    if ascending == 'false':
         ascending = False
     else:
         ascending = True
@@ -25,5 +25,5 @@ def sort_csv(file_path, ascending=True):
 
 if __name__ == "__main__":
     file_path = input("Nhập đường dẫn tới file CSV: ")
-    order = input("Sắp xếp tăng dần(True) hoặc giảm dần(False): ")
+    order = input("Sắp xếp tăng dần(True) hoặc giảm dần(False): ").strip().lower()
     sort_csv(file_path, order)
