@@ -2,14 +2,17 @@ import pandas as pd
 
 def sort_csv(file_path, ascending=True):
     """
+    Chức năng:
     Hàm sắp xếp file CSV theo cột Date và cột Country/Region.
     file_path: Đường dẫn đến file CSV đầu vào.
+
+    Tham số:
+    file_path: Đường dẫn tới file CSV.
     ascending: Thứ tự sắp xếp, True là tăng dần, False là giảm dần.
+
     """
     # Đọc dữ liệu từ file CSV
     df = pd.read_csv(file_path)
-    print(df.columns)
-
     if ascending == 'false':
         ascending = False
     else:
@@ -23,7 +26,3 @@ def sort_csv(file_path, ascending=True):
 
     print(f"Dữ liệu đã được sắp xếp theo cột '{sort_column}' và lưu vào '{file_path}'.")
 
-if __name__ == "__main__":
-    file_path = input("Nhập đường dẫn tới file CSV: ")
-    order = input("Sắp xếp tăng dần(True) hoặc giảm dần(False): ").strip().lower()
-    sort_csv(file_path, order)
