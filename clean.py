@@ -35,3 +35,6 @@ def clean_data(file_path):
 
     return df
 
+file_path = 'data_dirty.csv'
+clean = clean_data(file_path)
+print(clean)
