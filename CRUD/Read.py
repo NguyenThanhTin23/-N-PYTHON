@@ -7,5 +7,6 @@ def read(file_path):
     Tham số:
     file_path(str): Đường dẫn file CSV cần đọc
     """
+    #Đọc dữ liệu file csv vào DataFrame
     df=pd.read_csv(file_path)
     return df
