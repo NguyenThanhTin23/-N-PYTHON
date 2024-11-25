@@ -1,0 +1,140 @@
+body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+}
+
+.container {
+     background-color: #fff;
+}
+
+h2 {
+     text-align: center;
+     font-family: 'Courier New', Courier, monospace;
+     font-size: 2.5em;
+     color: #8B0000;
+     text-shadow: 2px 2px 4px #B22222;
+     margin-top: 20px;
+}
+
+.filter-fields {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 5px;
+     justify-content: center;
+}
+
+.filter-fields label {
+     width: 85px;
+     /* Cố định chiều rộng của label */
+     margin-right: 2px;
+     /* Khoảng cách giữa label và input */
+     margin-top: 15px;
+}
+
+.filter-fields input {
+     width: 150px;
+     /* Chiều rộng của các ô input */
+     /*padding: 5px;*/
+     color: #8B0000;
+}
+
+
+label {
+     font-weight: bold;
+     color: #8B0000;
+}
+
+input {
+     padding: 10px;
+     font-size: 16px;
+     border: 1px solid #ddd;
+     border-radius: 5px;
+     width: 100%;
+     max-width: 300px;
+     margin-top: 5px;
+     color: #8B0000;
+}
+
+.action-buttons {
+     display: flex;
+     justify-content: center;
+     gap: 10px;
+}
+
+.btn {
+     padding: 10px 20px;
+     font-size: 16px;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+     text-decoration: none;
+     background-color: #8B0000;
+     color: white;
+     text-align: center;
+     margin: 20px;
+}
+
+.btn:hover {
+     background-color: #B22222;
+}
+
+table {
+     width: 100%;
+     max-width: 1300px;
+     margin: auto;
+     border-collapse: collapse;
+     background-color: #8B0000;
+     color: white;
+}
+
+th,
+td {
+     padding: 10px;
+     text-align: center;
+     border: 1px solid #ddd;
+}
+
+th {
+     background-color: #B22222;
+}
+
+tr:nth-child(even) {
+     background-color: #FFCCCB;
+     color: #8B0000;
+}
+
+tr:hover {
+     background-color: #FF6347;
+}
+
+.pagination {
+     margin: 20px 0;
+     text-align: center;
+}
+
+.pagination a {
+     padding: 10px 15px;
+     background-color: #8B0000;
+     color: white;
+     border-radius: 5px;
+     margin: 0 5px;
+     text-decoration: none;
+}
+
+.pagination a.disabled {
+     background-color: #555;
+     pointer-events: none;
+}
+
+.pagination a:hover:not(.disabled) {
+     background-color: #B22222;
+}
+
+.page-info {
+     text-align: center;
+     font-weight: bold;
+     margin-top: 10px;
+     color: #8B0000;
+     font-size: 1.1em;
+}
