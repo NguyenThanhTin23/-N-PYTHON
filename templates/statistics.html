@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_statistics.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>THỐNG KÊ DỮ LIỆU</h2>
+        <form method="POST" action="/statistics/statistics" id="statisticsForm">
+            <div class="statistics-fields">
+                <label for="start_date">Start Date:</label>
+                <input type="text" id="start_date" name="start_date" placeholder="Enter Start Date">
+
+                <label for="end_date">End Date:</label>
+                <input type="text" id="end_date" name="end_date" placeholder="Enter End Date">
+
+                <p class="type" for="stats_type">Statistics Type:</p>
+                <select class="stats_type" name="stats_type">
+                    <option value="region">Region</option>
+                    <option value="day">Day</option>
+                    <option value="country">Country</option>
+                </select>
+            </div>
+            <div class="action-buttons">
+                <a href="{{ url_for('index.index') }}" class="btn">Home</a>
+                <button type="submit" class="btn">Generate Statistics</button>
+                <a href="{{ url_for('downloads.download_statistics_data') }}" class="btn" id="downloadBtn">Download</a>
+            </div>
+        </form>
+
+        <div id="tableContainer">
+            
+            <table>
+                <thead>
+                    <tr>
+                        {% for header in headers %}
+                            <th>{{ header }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if table_data %}
+                        {% for row in table_data %}
+                            <tr>
+                                {% for cell in row.values() %}
+                                    <td>{{ cell }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="{{ headers | length }}">No data available.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('statistics.statistics', page=1) }}">First Page</a>
+            {% else %}
+                <a class="disabled">First Page</a>
+            {% endif %}
+
+            {% if has_prev %}
+                <a href="{{ url_for('statistics.statistics', page=page-1) }}">Previous</a>
+            {% else %}
+                <a class="disabled">Previous</a>
+            {% endif %}
+
+            {% for p in nearby_pages %}
+                {% if p == page %}
+                    <a class="disabled">{{ p }}</a>
+                {% else %}
+                    <a href="{{ url_for('statistics.statistics', page=p) }}">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if has_next %}
+                <a href="{{ url_for('statistics.statistics', page=page+1) }}">Next</a>
+                <a href="{{ url_for('statistics.statistics', page=total_pages) }}">Last Page</a>
+            {% else %}
+                <a class="disabled">Next</a>
+                <a class="disabled">Last Page</a>
+            {% endif %}
+        </div>
+        <div class="page-info">
+            Page {{ page }} / {{ total_pages }}
+        </div>
+    </div>
+</body>
+</html>

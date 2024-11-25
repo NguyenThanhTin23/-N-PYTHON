@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sorting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_sort.css') }}">
+</head>
+<body>
+    <div class="container">
+          <h2>SORT DATA</h2>
+          <form method="POST" action="/sort/sort" id="sortForm">
+          <div class="action-buttons">
+              <a href="{{ url_for('index.index') }}" class="btn">Home</a>
+              <a href="{{ url_for('downloads.download_sort_data') }}" class="btn" id="downloadBtn">Download</a>
+          </div>
+          </form> 
+          <div class="table-wrapper">
+               <table>
+                    <thead>
+                         <tr>
+                              {% for header in headers %}
+                              <th>
+                                   <!-- Liên kết sắp xếp tăng dần (▲) và giảm dần (▼) -->
+                                   <a href="{{ url_for('sort.sort_data', column=header, order='asc', page=1) }}" 
+                                      class="{% if current_sort and current_sort['column'] == header and current_sort['order'] == 'asc' %}active-sort{% else %}inactive-sort{% endif %}">
+                                      ▲
+                                   </a>
+                                   {{ header }}
+                                   <a href="{{ url_for('sort.sort_data', column=header, order='desc', page=1) }}" 
+                                      class="{% if current_sort and current_sort['column'] == header and current_sort['order'] == 'desc' %}active-sort{% else %}inactive-sort{% endif %}">
+                                      ▼
+                                   </a>
+                               </th>
+                               
+                               
+                               
+                              {% endfor %}
+                         </tr>
+                    </thead>
+                    <tbody>
+                         {% for row in table_data %}
+                         <tr>
+                              {% for cell in row.values() %}
+                                   <td>{{ cell }}</td>
+                              {% endfor %}
+                         </tr>
+                         {% endfor %}
+                    </tbody>
+               </table>
+          </div>
+        
+        <!-- Phân trang -->
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('sort.sort_data', column=current_sort['column'], order=current_sort['order'], page=1) }}">First Page</a>
+            {% else %}
+                <a class="disabled">First Page</a>
+            {% endif %}
+
+            {% if has_prev %}
+                <a href="{{ url_for('sort.sort_data', column=current_sort['column'], order=current_sort['order'], page=page-1) }}">Previous</a>
+            {% else %}
+                <a class="disabled">Previous</a>
+            {% endif %}
+            
+            {% for p in nearby_pages %}
+                {% if p == page %}
+                    <a class="disabled">{{ p }}</a>
+                {% else %}
+                    <a href="{{ url_for('sort.sort_data', column=current_sort['column'], order=current_sort['order'], page=p) }}">{{ p }}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if has_next %}
+                <a href="{{ url_for('sort.sort_data', column=current_sort['column'], order=current_sort['order'], page=page+1) }}">Next</a>
+                <a href="{{ url_for('sort.sort_data', column=current_sort['column'], order=current_sort['order'], page=total_pages) }}">Last Page</a>
+            {% else %}
+                <a class="disabled">Next</a>
+                <a class="disabled">Last Page</a>
+            {% endif %}
+        </div>
+        <div class="page-info">
+          Page {{ page }} / {{ total_pages }}
+      </div>
+    </div>
+</body>
+</html>

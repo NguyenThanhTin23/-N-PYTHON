@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_chart.css') }}">
+</head>
+<body>
+    <h1>BIỂU ĐỒ VỀ COVID_19</h1>
+    <form action="/chart/chart" method="POST">
+        <div class="Type">
+            <label for="chart_type">Chọn loại biểu đồ:</label>
+            <select name="chart_type" id="chart_type">
+                <option value="cases_by_region">Biểu đồ số ca ghi nhận theo khu vực</option>
+                <option value="new_cases_month">Biểu đồ số ca mắc mới theo tháng</option>
+                <option value="cases_by_world">Biểu đồ covid trên thế giới theo tháng</option>
+                <option value="cases_region_monthly">Biểu đồ covid các khu vực theo tháng</option>
+            </select>
+        </div>
+        <div class="action-buttons">
+            <a href="{{ url_for('index.index') }}" class="btn">Home</a>
+            <button type="submit" class="btn">Vẽ biểu đồ</button>
+            <a href="{{ url_for('downloads.download_chart') }}" class="btn" id="downloadBtn">Download</a>
+        </div>
+    </form>
+        
+    {% if chart_url %}
+        <img src="{{ url_for('static', filename='chart.png') }}"alt="Chart" />
+    {% endif %}
+</body>
+</html>
