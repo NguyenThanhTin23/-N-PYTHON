@@ -1,89 +1,165 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filter Data</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_filter.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style_filter.css') }}"
+    />
+    <script>
+      // Kiểm tra năm nhuận
+      function isLeapYear(year) {
+        return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+      }
+
+      // Kiểm tra tính hợp lệ của ngày
+      function isValidDate(dateString) {
+        const [day, month, year] = dateString.split("/").map(Number);
+        if (month < 1 || month > 12 || day < 1) return false;
+
+        const daysInMonth = [
+          31,
+          isLeapYear(year) ? 29 : 28,
+          31,
+          30,
+          31,
+          30,
+          31,
+          31,
+          30,
+          31,
+          30,
+          31,
+        ];
+        return day <= daysInMonth[month - 1];
+      }
+
+      // Hàm kiểm tra tính hợp lệ của ngày
+      function validateDate(event) {
+        const startDate = document.getElementById("DateStart").value;
+        const endDate = document.getElementById("DateEnd").value;
+
+        if (startDate && !isValidDate(startDate)) {
+          alert(
+            "Ngày bắt đầu không hợp lệ. Vui lòng nhập ngày theo định dạng dd/mm/yyyy và đảm bảo ngày tồn tại."
+          );
+          event.preventDefault();
+          return false;
+        }
+
+        if (endDate && !isValidDate(endDate)) {
+          alert(
+            "Ngày kết thúc không hợp lệ. Vui lòng nhập ngày theo định dạng dd/mm/yyyy và đảm bảo ngày tồn tại."
+          );
+          event.preventDefault();
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </head>
+  <body>
     <div class="container">
-        <h2>FILTER DATA</h2>
-        <form method="POST" action="/filter/filter" id="filterForm">
-            <div class="filter-fields">
-                <label for="DateStart">Start Date:</label>
-                <input type="text" id="DateStart" name="DateStart" placeholder="Enter Start day">
+      <h2>FILTER DATA</h2>
+      <form
+        method="POST"
+        action="/filter/filter"
+        id="filterForm"
+        onsubmit="return validateDate(event)"
+      >
+        <div class="filter-fields">
+          <label for="DateStart">Start Date:</label>
+          <input
+            type="text"
+            id="DateStart"
+            name="DateStart"
+            placeholder="Enter Start day"
+          />
 
-                <label for="DateEnd">End Date:</label>
-                <input type="text" id="DateEnd" name="DateEnd" placeholder="Enter End day">
+          <label for="DateEnd">End Date:</label>
+          <input
+            type="text"
+            id="DateEnd"
+            name="DateEnd"
+            placeholder="Enter End day"
+          />
 
-                <label for="Country">Country:</label>
-                <input type="text" id="Country" name="Country" placeholder="Enter country name">
+          <label for="Country">Country:</label>
+          <input
+            type="text"
+            id="Country"
+            name="Country"
+            placeholder="Enter country name"
+          />
 
-                <label for="Region">Region:</label>
-                <input type="text" id="Region" name="Region" placeholder="Enter WHO Region">
-            </div>
-            <div class="action-buttons">
-                <a href="{{ url_for('index.index') }}" class="btn">Home</a>
-                <button type="submit" class="btn">Filter Data</button>
-                <a href="{{ url_for('downloads.download_filtered_data') }}" class="btn" id="downloadBtn">Download Data</a>
-            </div>
-        </form>
-
-        <div id="tableContainer">
-            <table>
-                <thead>
-                    <tr>
-                        {% for header in headers %}
-                            <th>{{ header }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in table_data %}
-                        <tr>
-                            {% for cell in row.values() %}
-                                <td>{{ cell }}</td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+          <label for="Region">Region:</label>
+          <input
+            type="text"
+            id="Region"
+            name="Region"
+            placeholder="Enter WHO Region"
+          />
         </div>
+        <div class="action-buttons">
+          <a href="{{ url_for('index.index') }}" class="btn">Home</a>
+          <button type="submit" class="btn">Filter Data</button>
+          <a
+            href="{{ url_for('downloads.download_filtered_data') }}"
+            class="btn"
+            id="downloadBtn"
+            >Download Data</a
+          >
+        </div>
+      </form>
 
-        <div class="pagination">
-            {% if page > 1 %}
-                <a href="{{ url_for('filter.filter_data', page=1) }}">First Page</a>
-            {% else %}
-                <a class="disabled">First Page</a>
-            {% endif %}
-
-            {% if has_prev %}
-                <a href="{{ url_for('filter.filter_data', page=page-1) }}">Previous</a>
-            {% else %}
-                <a class="disabled">Previous</a>
-            {% endif %}
-            
-            {% for p in nearby_pages %}
-                {% if p == page %}
-                    <a class="disabled">{{ p }}</a>
-                {% else %}
-                    <a href="{{ url_for('filter.filter_data', page=p) }}">{{ p }}</a>
-                {% endif %}
+      <div id="tableContainer">
+        <table>
+          <thead>
+            <tr>
+              {% for header in headers %}
+              <th>{{ header }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in table_data %}
+            <tr>
+              {% for cell in row.values() %}
+              <td>{{ cell }}</td>
+              {% endfor %}
+            </tr>
             {% endfor %}
+          </tbody>
+        </table>
+      </div>
 
-            {% if has_next %}
-                <a href="{{ url_for('filter.filter_data', page=page+1) }}">Next</a>
-                <a href="{{ url_for('filter.filter_data', page=total_pages) }}">Last Page</a>
-            {% else %}
-                <a class="disabled">Next</a>
-                <a class="disabled">Last Page</a>
-            {% endif %}
-        </div>
-        <div class="page-info">
-            Page {{ page }} / {{ total_pages }}
-        </div>
+      <div class="pagination">
+        {% if page > 1 %}
+        <a href="{{ url_for('filter.filter_data', page=1) }}">First Page</a>
+        {% else %}
+        <a class="disabled">First Page</a>
+        {% endif %} {% if has_prev %}
+        <a href="{{ url_for('filter.filter_data', page=page-1) }}">Previous</a>
+        {% else %}
+        <a class="disabled">Previous</a>
+        {% endif %} {% for p in nearby_pages %} {% if p == page %}
+        <a class="disabled">{{ p }}</a>
+        {% else %}
+        <a href="{{ url_for('filter.filter_data', page=p) }}">{{ p }}</a>
+        {% endif %} {% endfor %} {% if has_next %}
+        <a href="{{ url_for('filter.filter_data', page=page+1) }}">Next</a>
+        <a href="{{ url_for('filter.filter_data', page=total_pages) }}"
+          >Last Page</a
+        >
+        {% else %}
+        <a class="disabled">Next</a>
+        <a class="disabled">Last Page</a>
+        {% endif %}
+      </div>
+      <div class="page-info">Page {{ page }} / {{ total_pages }}</div>
     </div>
-</body>
+  </body>
 </html>
