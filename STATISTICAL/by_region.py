@@ -1,6 +1,32 @@
 import pandas as pd
 
 def region(data, start_date, end_date):
+    """
+        Tính tổng số liệu COVID-19 theo khu vực WHO và toàn cầu, dựa trên dữ liệu của ngày cuối cùng 
+        trong khoảng thời gian được cung cấp.
+
+        Parameters:
+        -----------
+        data : pandas.DataFrame
+            DataFrame chứa dữ liệu với các cột bắt buộc:
+            - 'Date': Ngày (định dạng dd/mm/yyyy)
+            - 'Country/Region': Tên quốc gia
+            - 'WHO Region': Tên khu vực WHO
+            - 'Confirmed': Số ca nhiễm
+            - 'Deaths': Số ca tử vong
+            - 'Recovered': Số ca hồi phục
+        start_date : str
+            Ngày bắt đầu (định dạng dd/mm/yyyy).
+        end_date : str
+            Ngày kết thúc (định dạng dd/mm/yyyy).
+
+        Returns:
+        --------
+        pandas.DataFrame
+            DataFrame chứa tổng số ca nhiễm, tử vong, và hồi phục theo từng khu vực WHO,
+            kèm theo dòng tổng toàn cầu (The world).
+
+    """
     # Chuyển đổi định dạng ngày tháng
     data['Date'] = pd.to_datetime(data['Date'], format='%d/%m/%Y')
     start_date = pd.to_datetime(start_date, format='%d/%m/%Y')
