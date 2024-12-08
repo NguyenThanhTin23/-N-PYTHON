@@ -22,12 +22,6 @@ def add_data():
         New_deaths = int(request.form['New_deaths'])  
         New_recovered = int(request.form['New_recovered'])  
         WHO_Region = request.form['WHO_Region']  
-        if (Confirmed < 0 or Deaths < 0 or Recovered < 0 or
-            Active < 0 or New_cases < 0 or New_deaths < 0 or
-            New_recovered < 0):
-            flash("Giá trị nhập vào phải lớn hơn hoặc bằng 0!", 'danger')
-            return redirect('/update')
-
         new_row = [Date, Country_Region, Confirmed, Deaths, Recovered, Active, New_cases, New_deaths, New_recovered, WHO_Region]  
 
         try:  
